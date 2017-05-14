@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-training",
+  "version": "0.0.1",
+  "description": "Simple poor version of You Tube made for excerice",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dplocki",
+  "license": "GNU General Public License v3.0",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
