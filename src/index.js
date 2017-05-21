@@ -50,11 +50,31 @@ router.post('/login', function(req, res) {
   res.json({ message: "ok", token: token });
 })
 
-router.get('/users', passport.authenticate('jwt', { session: false }),
-  function(req, res) {
+var onlyLoggedUsers = passport.authenticate('jwt', { session: false })
+
+router.get('/users', onlyLoggedUsers, function(req, res) {
     res.json({ message: "Success! You can not see this without a token" });
-  }
-)
+})
+
+router.get('/videos', function(req, res) {
+  res.json({'status': 'todo'})
+})
+
+router.post('/videos', onlyLoggedUsers, function(req, res) {
+  res.json({'status': 'todo'})
+})
+
+router.get('/videos/:videoId', function(req, res) {
+  res.json({'status': 'todo'})
+})
+
+router.get('/videos/:videoId/stream', function(req, res) {
+  res.json({'status': 'todo'})
+})
+
+router.get('/videos/:videoId', function(req, res) {
+  res.json({'status': 'todo'})
+})
 
 app.get('/', function(req, res) {
     res.send('Hello! The API is at http://localhost:' + PORT + '/api')
