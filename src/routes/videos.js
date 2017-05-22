@@ -1,6 +1,8 @@
-const Video = require('../models/video')
 const express = require('express')
+const _ = require('lodash')
 const onlyLoggedUsers = require('../utils').onlyLoggedUsers
+
+const Video = require('../models/video')
 
 router = express.Router()
 
@@ -19,7 +21,7 @@ router.post('/', onlyLoggedUsers, function(req, res) {
       headers: req.headers
   });
 
-  const ALLOWED_FIELDS = [ 'title', 'description' ];
+  const ALLOWED_FIELDS = [ 'title' ];
   const video = {
       path: path.resolve(config.STORAGE_ROOT, uuid()),
       author: req.user.id
