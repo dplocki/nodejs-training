@@ -1,43 +1,49 @@
-var config = require('./config'); // get our config file
-var express = require('express')
-var mongoose = require('mongoose')
-var bodyParser = require('body-parser');
-var jsonwebtoken = require('jsonwebtoken');
-var passport = require('passport');
-var passportJWT = require('passport-jwt');
+const config = require('./config')
+const express = require('express')
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
+const jsonwebtoken = require('jsonwebtoken')
+const passport = require('passport')
+const passportJWT = require('passport-jwt')
+const _ = require('lodash')
+const fs = require('fs')
+
+var User = require('./models/user')
 
 passport.use(new passportJWT.Strategy({
-  jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeader(),
-  secretOrKey: config.secret
-}, function(jwtPayload, next) {
-  var user = true
-  if (user) {
-    next(null, user)
-  } else {
-    next(null, false)
-  }
-}))
+    jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeader(),
+    secretOrKey: config.secret
+  }, function(jwtPayload, next) {
+    var user = true
+    if (user) {
+      next(null, user)
+    } else {
+      next(null, false)
+    }
+  })
+)
 
 const PORT = process.env.PORT || 3000
 
 mongoose.connect(config.database)
 var app = express()
-var router = express.Router()
 
 app.use(passport.initialize());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use('/api', router)
 
-router.route('/api')
-router.get('/', function(req, res) {
+app.get('/', function(req, res) {
+    res.send('Hello! The API is at http://localhost:' + PORT + '/api')
+})
+
+app.get('/api', function(req, res) {
   res.send('Yep, that is API')
 })
 
-router.post('/login', function(req, res) {
+app.post('/login', function(req, res) {
   if (req.body.name && req.body.password) {
-    var name = req.body.name;
-    var password = req.body.password;
+    var name = req.body.name
+    var password = req.body.password
   }
 
   var user = true
@@ -50,35 +56,8 @@ router.post('/login', function(req, res) {
   res.json({ message: "ok", token: token });
 })
 
-var onlyLoggedUsers = passport.authenticate('jwt', { session: false })
-
-router.get('/users', onlyLoggedUsers, function(req, res) {
-    res.json({ message: "Success! You can not see this without a token" });
-})
-
-router.get('/videos', function(req, res) {
-  res.json({'status': 'todo'})
-})
-
-router.post('/videos', onlyLoggedUsers, function(req, res) {
-  res.json({'status': 'todo'})
-})
-
-router.get('/videos/:videoId', function(req, res) {
-  res.json({'status': 'todo'})
-})
-
-router.get('/videos/:videoId/stream', function(req, res) {
-  res.json({'status': 'todo'})
-})
-
-router.get('/videos/:videoId', function(req, res) {
-  res.json({'status': 'todo'})
-})
-
-app.get('/', function(req, res) {
-    res.send('Hello! The API is at http://localhost:' + PORT + '/api')
-})
+app.use('/api/users', require('./routes/users'))
+app.use('/api/videos', require('./routes/videos'))
 
 app.listen(PORT, function() {
   console.log('Open http://localhost:' + PORT)

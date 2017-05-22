@@ -23,7 +23,7 @@ Enter adress: http://localhost:3000
 
 ```
 sudo npm install nodemon -g
-npm watch
+npm run watch
 ```
 
 Enter adress: http://localhost:3000
