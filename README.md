@@ -4,8 +4,8 @@ The code for NodeJS training. And Docker.
 
 ## Run with Docker
 
-```
-docker build -­t nodejs_training .
+```sh
+docker build -t nodejs_training .
 docker run ­--rm -p 13000:3000 -v $(pwd):/usr/src/app/ -it nodejs_training
 ```
 
@@ -13,7 +13,7 @@ Enter address: http://localhost:13000
 
 ## Run directly
 
-```
+```sh
 npm install
 npm start
 ```
@@ -22,7 +22,7 @@ Enter address: http://localhost:3000
 
 ## Development run
 
-```
+```sh
 sudo npm install nodemon -g
 npm run watch
 ```
