@@ -1,7 +1,7 @@
 {
   "name": "nodejs-training",
   "version": "0.0.1",
-  "description": "Simple poor version of You Tube made for excerice",
+  "description": "Simple poor version of You Tube made for experience",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
