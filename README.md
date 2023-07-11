@@ -2,6 +2,8 @@
 
 The code for NodeJS training. And Docker.
 
+Some time ago, the company which I was working in, started this Node course for its developers. I volunteer. No idea what happens with the rest of code from this project.
+
 ## Run with Docker
 
 ```sh
