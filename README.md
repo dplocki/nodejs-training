@@ -2,7 +2,7 @@
 
 The code for NodeJS training. And Docker.
 
-Some time ago, the company which I was working in, started this Node course for its developers. I volunteer. No idea what happens with the rest of code from this project.
+Some time ago, the company which I was working in, started this Node course for its developers. I volunteered. I have no idea what happened with the rest of code from this project (definitly there was more commits).
 
 ## Run with Docker
 
